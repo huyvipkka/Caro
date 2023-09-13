@@ -6,14 +6,15 @@ pygame.init()
 class Square:
     font_small = pygame.font.SysFont("Lucida Sans", 25)
     def __init__(self, x, y, size):
-        self.is_able = True
+        self.is_empty = True
         self.rect = pygame.Rect(x, y, size, size)
         self.__size = size
-        self.lable = Lable('', 'red')
+        self.lable = Lable('', 'black')
         
     #draw square, centered lable and draw lable
-    def draw(self, screen):
-        pygame.draw.rect(screen, 'black', self.rect, 1)
+    def draw(self, screen, mouse_pos):
+        if self.rect.collidepoint(mouse_pos):
+            pygame.draw.rect(screen, 'black', self.rect, 2)
         if self.lable != '':
             render = Square.font_small.render(self.lable.text, True, self.lable.color)
             rect_render = (render.get_rect()[2], render.get_rect()[3])

@@ -4,25 +4,20 @@ from src.lable import Lable
 from src.check_win_able import CheckWinable
 
 class Player(CheckWinable):
+    count = 0
     def __init__(self, lable: Lable):
         CheckWinable.__init__(self)
         self.lable = lable
         self.__win = False
-    
-    count = 0
-    def update(self, mouse_pos, map: Map):
-        try:
-            i, j = map.getPositonSquare(mouse_pos)
-            if map.map[i][j].is_able:
-                map.map[i][j].lable = self.lable
-                map.map[i][j].is_able = False
-                Player.count += 1
-                if self.checkWin(i, j, map):
-                    self.__win = True
-        except:
-            ...
+        
+    def update(self, mouse_pos, i, j, matrix: Map):
+        if matrix.matrix_square[i][j].is_empty:
+            matrix.matrix_square[i][j].is_empty = False
+            matrix.matrix_square[i][j].lable = self.lable
+            Player.count += 1
+            self.checking(i, j, matrix)
+            if self.checkWin():
+                self.__win = True
 
-    def is_winner(self):
-        return self.__win
     
     
