@@ -20,7 +20,6 @@ class Map:
             for square in row:
                 if square.rect.collidepoint(mouse_pos):
                     return square
-        return False
     
     def getPositonSquare(self, mouse_pos):
         for row_idx, row in enumerate(self.map):

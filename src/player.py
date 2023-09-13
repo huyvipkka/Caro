@@ -22,7 +22,6 @@ class Player(CheckWinable):
         except:
             ...
 
-    
     def is_winner(self):
         return self.__win
     

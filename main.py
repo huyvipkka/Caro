@@ -16,7 +16,7 @@ player1 = Player(x)
 player2 = Player(o)
 
 while running:
-    screen.fill("black")
+    screen.fill("white")
     
     mouse_pos = pygame.mouse.get_pos()
     for event in pygame.event.get():
@@ -28,11 +28,11 @@ while running:
                 if player1.count % 2 == 0:
                     player1.update(mouse_pos, caro_map)
                     if player1.is_winner():
-                        print('player 1 win')
+                        print('x win')
                 else:
                     player2.update(mouse_pos, caro_map)
                     if player2.is_winner():
-                        print('player 2 win')
+                        print('o win')
 
     caro_map.draw(screen)
     pygame.display.flip()

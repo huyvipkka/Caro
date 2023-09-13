@@ -13,7 +13,7 @@ class Square:
         
     #draw square, centered lable and draw lable
     def draw(self, screen):
-        pygame.draw.rect(screen, 'white', self.rect, 1)
+        pygame.draw.rect(screen, 'black', self.rect, 1)
         if self.lable != '':
             render = Square.font_small.render(self.lable.text, True, self.lable.color)
             rect_render = (render.get_rect()[2], render.get_rect()[3])
