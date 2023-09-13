@@ -23,15 +23,16 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.MOUSEBUTTONDOWN:
-            print(player1.count)
-            if player1.count % 2 == 0:
-                player1.update(mouse_pos, caro_map)
-                if player1.is_winner():
-                    print('player 1 win')
-            else:
-                player2.update(mouse_pos, caro_map)
-                if player2.is_winner():
-                    print('player 2 win')
+            if pygame.mouse.get_pressed()[0]:
+                print(player1.count)
+                if player1.count % 2 == 0:
+                    player1.update(mouse_pos, caro_map)
+                    if player1.is_winner():
+                        print('player 1 win')
+                else:
+                    player2.update(mouse_pos, caro_map)
+                    if player2.is_winner():
+                        print('player 2 win')
 
     caro_map.draw(screen)
     pygame.display.flip()
