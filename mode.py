@@ -77,7 +77,7 @@ def Game2Player():
 
     x = Lable('x', 'red')
     o = Lable('o', 'green')
-    caro_map = Map(scr_width//2 - Map.map_size_px[0]//2, 0)
+    caro_map = Map(scr_width//2 - Map.map_size_px[0]//2, scr_height//2 - Map.map_size_px[1]//2)
     player1 = Player(x)
     player2 = Player(o)
 
@@ -97,7 +97,7 @@ def Game2Player():
         if Player.count % 2 == 0:
             text = 'X turn'
         txt_size = pygame.font.Font.size(font_big, text)
-        DrawText(screen, text, 'white', font_big, (scr_width//2 - txt_size[0]//2, scr_height - txt_size[1]))
+        DrawText(screen, text, 'white', font_big, (scr_width//2 - txt_size[0]//2, 5))
                         
         caro_map.draw(screen, mouse_pos)
         if player1.checkWin():
@@ -116,7 +116,7 @@ def Game1Player():
 
     x = Lable('x', 'red')
     o = Lable('o', 'green')
-    caro_map = Map(scr_width//2 - Map.map_size_px[0]//2, 0)
+    caro_map = Map(scr_width//2 - Map.map_size_px[0]//2, scr_height//2 - Map.map_size_px[1]//2)
     player1 = Player(x)
     bot = Bot(o)
 
@@ -135,7 +135,7 @@ def Game1Player():
             bot.update(caro_map)
             text = 'O turn'
         txt_size = pygame.font.Font.size(font_big, text)
-        DrawText(screen, text, 'white', font_big, (scr_width//2 - txt_size[0]//2, scr_height - txt_size[1]))
+        DrawText(screen, text, 'white', font_big, (scr_width//2 - txt_size[0]//2, 5))
                                   
         caro_map.draw(screen, mouse_pos)
         if player1.checkWin():

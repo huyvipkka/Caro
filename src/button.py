@@ -26,8 +26,8 @@ class Button:
             if key[k]:
                 return True
 
-        if self.rect.collidepoint(pos[0], pos[1]):
-            if pygame.mouse.get_pressed()[0]:
+        if pygame.mouse.get_pressed()[0]:
+            if self.rect.collidepoint(pos[0], pos[1]):
                 return True
         return False
         

@@ -2,7 +2,7 @@ import pygame
 from src.square import Square
 
 class Map:
-    map_size = (40, 25) #width, height
+    map_size = (45, 25) #width, height
     square_size = 25
     map_size_px = (square_size*map_size[0]+1, square_size*map_size[1]+1)
     def __init__(self, x, y):

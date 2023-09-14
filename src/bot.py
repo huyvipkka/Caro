@@ -2,7 +2,6 @@ from src.player import Player
 from src.map import Map
 import random
 
-
 class Bot(Player):
     def __init__(self, lable):
         Player.__init__(self, lable)
