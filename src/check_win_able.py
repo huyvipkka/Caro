@@ -11,7 +11,6 @@ class CheckWinable:
         self.end_pos = ()
     
     def checking(self, i, j, caro_map: Map):
-        
         self.__checkCol(i, j, caro_map)
         self.__checkRow(i, j, caro_map)
         self.__checkDiagonalLine1(i, j, caro_map)
@@ -33,17 +32,20 @@ class CheckWinable:
         while caro_map.matrix_square[i][endx].lable == caro_map.matrix_square[i][j].lable and endx < Map.map_size[0]-1:
             d += 1
             endx += 1
-        endx -= 1
+        if endx == Map.map_size[0]-1 and caro_map.matrix_square[i][endx].lable == caro_map.matrix_square[i][j].lable:
+            d += 1
+        else:
+            endx -= 1
         startx = j
-        while caro_map.matrix_square[i][startx].lable == caro_map.matrix_square[i][j].lable and startx > 0:
+        while caro_map.matrix_square[i][startx].lable == caro_map.matrix_square[i][j].lable and startx > -1:
             d += 1
             startx -= 1
         startx += 1
         if d > 5:
-            self.start_pos = (caro_map.matrix_square[i][startx].rect.left,
-                              caro_map.matrix_square[i][startx].rect.centery)
-            self.end_pos = (caro_map.matrix_square[i][endx].rect.right,
-                              caro_map.matrix_square[i][endx].rect.centery)
+            self.start_pos = (caro_map.matrix_square[i][startx].rect.left + caro_map.x,
+                              caro_map.matrix_square[i][startx].rect.centery + caro_map.y)
+            self.end_pos = (caro_map.matrix_square[i][endx].rect.right + caro_map.x,
+                              caro_map.matrix_square[i][endx].rect.centery + caro_map.y)
             self.__row = True
         
     def __checkCol(self, i, j, caro_map: Map):
@@ -52,17 +54,20 @@ class CheckWinable:
         while caro_map.matrix_square[endy][j].lable == caro_map.matrix_square[i][j].lable and endy < Map.map_size[1]-1:
             d += 1
             endy += 1
-        endy -= 1
+        if endy == Map.map_size[1]-1 and caro_map.matrix_square[endy][j].lable == caro_map.matrix_square[i][j].lable:
+            d += 1
+        else:
+            endy -= 1
         starty = i 
-        while caro_map.matrix_square[starty][j].lable == caro_map.matrix_square[i][j].lable and starty > 0:
+        while caro_map.matrix_square[starty][j].lable == caro_map.matrix_square[i][j].lable and starty > -1:
             d += 1
             starty -= 1
         starty += 1
         if d > 5:
-            self.start_pos = (caro_map.matrix_square[starty][j].rect.centerx, 
-                              caro_map.matrix_square[starty][j].rect.top,)
-            self.end_pos = (caro_map.matrix_square[endy][j].rect.centerx,
-                            caro_map.matrix_square[endy][j].rect.bottom)
+            self.start_pos = (caro_map.matrix_square[starty][j].rect.centerx + caro_map.x, 
+                              caro_map.matrix_square[starty][j].rect.top + caro_map.y)
+            self.end_pos = (caro_map.matrix_square[endy][j].rect.centerx + caro_map.x,
+                            caro_map.matrix_square[endy][j].rect.bottom + caro_map.y)
             self.__row = True
 
     def __checkDiagonalLine1(self, i, j, caro_map: Map):
@@ -73,11 +78,14 @@ class CheckWinable:
             endy += 1
             endx += 1
             d += 1
-        endx -= 1
-        endy -= 1
+        if endx == Map.map_size[0]-1 or endy == Map.map_size[1]-1 and caro_map.matrix_square[endy][endx].lable == caro_map.matrix_square[i][j].lable:
+            d += 1
+        else:
+            endx -= 1
+            endy -= 1
         startx = j
         starty = i
-        while caro_map.matrix_square[starty][startx].lable == caro_map.matrix_square[i][j].lable and startx > 0 and starty > 0:
+        while caro_map.matrix_square[starty][startx].lable == caro_map.matrix_square[i][j].lable and startx > -1 and starty > -1:
             startx -= 1
             starty -= 1
             d += 1
@@ -85,28 +93,38 @@ class CheckWinable:
         starty += 1
         if d > 5:
             self.__diagonal_line1 = True
-            self.start_pos = caro_map.matrix_square[starty][startx].rect.topleft
-            self.end_pos = caro_map.matrix_square[endy][endx].rect.bottomright
+            self.start_pos = (caro_map.matrix_square[starty][startx].rect.left + caro_map.x,
+                              caro_map.matrix_square[starty][startx].rect.top + caro_map.y)
+            self.end_pos = (caro_map.matrix_square[endy][endx].rect.right + caro_map.x,
+                            caro_map.matrix_square[endy][endx].rect.bottom + caro_map.y)
              
     def __checkDiagonalLine2(self, i, j, caro_map: Map):
         d = 0
         endy = i
         endx = j
-        while caro_map.matrix_square[endy][endx].lable == caro_map.matrix_square[i][j].lable and endx > 0 and endy < Map.map_size[1]-1:
+        while caro_map.matrix_square[endy][endx].lable == caro_map.matrix_square[i][j].lable and endx > -1 and endy < Map.map_size[1]-1:
             endy += 1
             endx -= 1
             d += 1
-        endx += 1
-        endy -= 1
+        if endy == Map.map_size[1]-1 and caro_map.matrix_square[endy][endx].lable == caro_map.matrix_square[i][j].lable:
+            d += 1
+        else:
+            endy -= 1
+            endx += 1
         startx = j
         starty = i
-        while caro_map.matrix_square[starty][startx].lable == caro_map.matrix_square[i][j].lable and startx < Map.map_size[0]-1 and starty > 0:
+        while caro_map.matrix_square[starty][startx].lable == caro_map.matrix_square[i][j].lable and startx < Map.map_size[0]-1 and starty > -1:
             startx += 1
             starty -= 1
             d += 1
-        startx -= 1
-        starty += 1
+        if startx == Map.map_size[0]-1 and caro_map.matrix_square[endy][endx].lable == caro_map.matrix_square[i][j].lable:
+            d += 1
+        else:
+            startx -= 1
+            starty += 1
         if d > 5:
             self.__diagonal_line1 = True
-            self.start_pos = caro_map.matrix_square[starty][startx].rect.topright
-            self.end_pos = caro_map.matrix_square[endy][endx].rect.bottomleft
+            self.start_pos = (caro_map.matrix_square[starty][startx].rect.right + caro_map.x,
+                              caro_map.matrix_square[starty][startx].rect.top + caro_map.y)
+            self.end_pos = (caro_map.matrix_square[endy][endx].rect.left + caro_map.x,
+                              caro_map.matrix_square[endy][endx].rect.bottom + caro_map.y)
