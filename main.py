@@ -1,5 +1,5 @@
 import pygame
-from mode import Game2Player, Game1Player, Start
+from mode import Start
 
 pygame.init()
 
