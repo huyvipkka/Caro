@@ -34,12 +34,12 @@ class CheckWinable:
             d += 1
             endx += 1
         endx -= 1
-        startx = j - 1
+        startx = j
         while caro_map.matrix_square[i][startx].lable == caro_map.matrix_square[i][j].lable and startx > 0:
             d += 1
             startx -= 1
         startx += 1
-        if d > 4:
+        if d > 5:
             self.start_pos = (caro_map.matrix_square[i][startx].rect.left,
                               caro_map.matrix_square[i][startx].rect.centery)
             self.end_pos = (caro_map.matrix_square[i][endx].rect.right,
@@ -53,12 +53,12 @@ class CheckWinable:
             d += 1
             endy += 1
         endy -= 1
-        starty = i - 1
+        starty = i 
         while caro_map.matrix_square[starty][j].lable == caro_map.matrix_square[i][j].lable and starty > 0:
             d += 1
             starty -= 1
         starty += 1
-        if d > 4:
+        if d > 5:
             self.start_pos = (caro_map.matrix_square[starty][j].rect.centerx, 
                               caro_map.matrix_square[starty][j].rect.top,)
             self.end_pos = (caro_map.matrix_square[endy][j].rect.centerx,
@@ -69,21 +69,21 @@ class CheckWinable:
         d = 0
         endy = i
         endx = j
-        while caro_map.matrix_square[endy][endx].lable == caro_map.matrix_square[i][j].lable and endx < Map.map_size[0]-1 and endy < Map.map_size[1]:
+        while caro_map.matrix_square[endy][endx].lable == caro_map.matrix_square[i][j].lable and endx < Map.map_size[0]-1 and endy < Map.map_size[1]-1:
             endy += 1
             endx += 1
             d += 1
         endx -= 1
         endy -= 1
-        startx = j - 1
-        starty = i - 1
+        startx = j
+        starty = i
         while caro_map.matrix_square[starty][startx].lable == caro_map.matrix_square[i][j].lable and startx > 0 and starty > 0:
             startx -= 1
             starty -= 1
             d += 1
         startx += 1
         starty += 1
-        if d > 4:
+        if d > 5:
             self.__diagonal_line1 = True
             self.start_pos = caro_map.matrix_square[starty][startx].rect.topleft
             self.end_pos = caro_map.matrix_square[endy][endx].rect.bottomright
@@ -98,15 +98,15 @@ class CheckWinable:
             d += 1
         endx += 1
         endy -= 1
-        startx = j + 1
-        starty = i - 1
+        startx = j
+        starty = i
         while caro_map.matrix_square[starty][startx].lable == caro_map.matrix_square[i][j].lable and startx < Map.map_size[0]-1 and starty > 0:
             startx += 1
             starty -= 1
             d += 1
         startx -= 1
         starty += 1
-        if d > 4:
+        if d > 5:
             self.__diagonal_line1 = True
             self.start_pos = caro_map.matrix_square[starty][startx].rect.topright
             self.end_pos = caro_map.matrix_square[endy][endx].rect.bottomleft

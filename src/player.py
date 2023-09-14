@@ -8,16 +8,15 @@ class Player(CheckWinable):
     def __init__(self, lable: Lable):
         CheckWinable.__init__(self)
         self.lable = lable
-        self.__win = False
         
-    def update(self, mouse_pos, i, j, matrix: Map):
-        if matrix.matrix_square[i][j].is_empty:
-            matrix.matrix_square[i][j].is_empty = False
-            matrix.matrix_square[i][j].lable = self.lable
-            Player.count += 1
-            self.checking(i, j, matrix)
-            if self.checkWin():
-                self.__win = True
-
+    def update(self, mouse_pos, matrix: Map): 
+        try:
+            i, j = matrix.getPositonSquare(mouse_pos)
+            if matrix.matrix_square[i][j].is_empty:
+                matrix.matrix_square[i][j].is_empty = False
+                matrix.matrix_square[i][j].lable = self.lable
+                Player.count += 1
+                self.checking(i, j, matrix)
+        except:...
     
     
