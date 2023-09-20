@@ -17,6 +17,7 @@ def Start():
     running = True
     while running:
         screen.blit(bgr_img, (scr_width//2 - bgr_img.get_size()[0]//2, 0))
+        mouse_pos = pygame.mouse.get_pos()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -30,11 +31,11 @@ def Start():
         game_1_plater_btn.draw(screen)
         game_2_plater_btn.draw(screen)
         quit_btn.draw(screen)
-        if game_1_plater_btn.check():
+        if game_1_plater_btn.check(mouse_pos):
             Game1Player()
-        if game_2_plater_btn.check():
+        if game_2_plater_btn.check(mouse_pos):
             Game2Player()
-        if quit_btn.check():
+        if quit_btn.check(mouse_pos):
             running = False
             
         pygame.display.flip()
@@ -44,6 +45,7 @@ def Start():
 def EndGame(winner):
     running = True
     while running:
+        mouse_pos = pygame.mouse.get_pos()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -61,11 +63,11 @@ def EndGame(winner):
         game_1_plater_btn.draw(screen)
         game_2_plater_btn.draw(screen)
         quit_btn.draw(screen)
-        if game_1_plater_btn.check():
+        if game_1_plater_btn.check(mouse_pos):
             Game1Player()
-        if game_2_plater_btn.check():
+        if game_2_plater_btn.check(mouse_pos):
             Game2Player()
-        if quit_btn.check():
+        if quit_btn.check(mouse_pos):
             running = False
         
         pygame.display.flip()

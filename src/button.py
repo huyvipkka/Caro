@@ -19,15 +19,14 @@ class Button:
         y = self.rect.centery - self.size[1]//2
         screen.blit(self.font.render(self.text, True, color), (x, y))
     
-    def check(self, *keys_pressed):
+    def check(self, mouse_pos, *keys_pressed):
         key = pygame.key.get_pressed()
-        pos = pygame.mouse.get_pos()
         for k in keys_pressed:
             if key[k]:
                 return True
 
         if pygame.mouse.get_pressed()[0]:
-            if self.rect.collidepoint(pos[0], pos[1]):
+            if self.rect.collidepoint(mouse_pos):
                 return True
         return False
         
